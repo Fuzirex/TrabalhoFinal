@@ -1,0 +1,10 @@
+Implementações: LinkedList e DoublyLinkedList
+Situação: Agenda de contatos
+
+Para rodar as implementações: src.main.parte01_main -> LinkedListMain & DoublyLinkedListMain
+                              src.main.parte02_main -> SortLinkedList
+
+
+Tempo dos sorts:
+    Bubble Sort: 1279ms
+    Merge Sort: 5ms
