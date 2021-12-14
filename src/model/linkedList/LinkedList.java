@@ -16,9 +16,11 @@ public class LinkedList {
         if (head != null) {
             Node currentNode = head;
 
+            //Enquanto tiver um proximo node, continua
             while (currentNode.getNextNode() != null)
                 currentNode = currentNode.getNextNode();
 
+            // Quando chegar no ultimo, adiciona o novo como próximo do último
             currentNode.setNextNode(new Node(contact));
         } else {
             head = new Node(contact);
@@ -27,6 +29,7 @@ public class LinkedList {
 
     public void remove(int indexToRemove) {
         if (head != null) {
+            // Se for pra remover o primeiro
             if (indexToRemove == 0)
                 head = head.getNextNode();
             else {
@@ -34,7 +37,9 @@ public class LinkedList {
                 Node currentNode = head;
                 Node previousNode = null;
 
+                //Enquanto o index atual ainda não chegar no solicitado, continua
                 while (index < indexToRemove) {
+                    //Se passar tudo e ainda não encontrar a posição, para
                     if (currentNode == null) {
                         JOptionPane.showMessageDialog(null, "Item não encontrado.");
                         break;
@@ -45,6 +50,7 @@ public class LinkedList {
                     index++;
                 }
 
+                //Se achou, troca sua posição com o seu próximo
                 if (currentNode != null)
                     previousNode.setNextNode(currentNode.getNextNode());
             }
@@ -58,7 +64,9 @@ public class LinkedList {
             int index = 0;
             Node currentNode = head;
 
+            //Enquanto o index atual ainda não chegar no solicitado, continua
             while (index < indexToFind) {
+                //Se passar tudo e ainda não encontrar a posição, retorna null
                 if (currentNode == null) {
                     JOptionPane.showMessageDialog(null, "Item não encontrado.");
                     return null;
@@ -68,6 +76,7 @@ public class LinkedList {
                 index++;
             }
 
+            //Retorna o contato localizado
             return currentNode.getContact();
 
         } else {
@@ -84,6 +93,7 @@ public class LinkedList {
             if (head.getContact().getName().toLowerCase().contains(name.toLowerCase()))
                 contacts.add(head.getContact());
 
+            //Percorre a lista buscando os contatos que dão match
             while (currentNode.getNextNode() != null) {
                 currentNode = currentNode.getNextNode();
 
@@ -104,7 +114,9 @@ public class LinkedList {
             int index = 0;
             Node currentNode = head;
 
+            //Enquanto o index atual ainda não chegar no solicitado, continua
             while (index < indexToUpdate) {
+                //Se passar tudo e ainda não encontrar a posição, para
                 if (currentNode == null) {
                     JOptionPane.showMessageDialog(null, "Item não encontrado.");
                     break;
@@ -114,6 +126,7 @@ public class LinkedList {
                 index++;
             }
 
+            //Se achar, substitui o valor
             if (currentNode != null)
                 currentNode.setContact(newContact);
 
@@ -128,6 +141,7 @@ public class LinkedList {
             Node currentNode = head;
             int index = 0;
 
+            //Percorre a lista concatenando os valores
             do {
                 Contact contact = currentNode.getContact();
                 sb.append(String.format("%s -> Nome: %s --- Número: %s \n", index, contact.getName(), contact.getNumber()));
@@ -200,25 +214,19 @@ public class LinkedList {
     }
 
     private Node mergeSort(Node h) {
-        // Base case : if head is null
         if (h == null || h.getNextNode() == null) {
             return h;
         }
 
-        // get the middle of the list
         Node middle = getMiddle(h);
         Node nextofmiddle = middle.getNextNode();
 
-        // set the next of middle Node to null
         middle.setNextNode(null);
 
-        // Apply mergeSort on left list
         Node left = mergeSort(h);
 
-        // Apply mergeSort on right list
         Node right = mergeSort(nextofmiddle);
 
-        // Merge the left and right lists
         Node sortedlist = sortedMerge(left, right);
 
         return sortedlist;
@@ -226,13 +234,11 @@ public class LinkedList {
 
     private Node sortedMerge(Node a, Node b) {
         Node result = null;
-        /* Base cases */
         if (a == null)
             return b;
         if (b == null)
             return a;
 
-        /* Pick either a or b, and recur */
         if (a.getContact().getName().compareTo(b.getContact().getName()) <= 0) {
             result = a;
             result.setNextNode(sortedMerge(a.getNextNode(), b));
@@ -244,7 +250,6 @@ public class LinkedList {
         return result;
     }
 
-    // Utility function to get the middle of the linked list
     private static Node getMiddle(Node head) {
         if (head == null)
             return head;
